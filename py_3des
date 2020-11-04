@@ -1,0 +1,18 @@
+# coding: utf-8
+
+import base64
+from pyDes import *
+
+# For Python3, you'll need to use bytes, i.e.:
+#   data = b"Please encrypt my data"
+#   k = des(b"DESCRYPT", CBC, b"\0\0\0\0\0\0\0\0", pad=None, padmode=PAD_PKCS5)
+
+data = "demo"
+# 16位或24位
+key = "123456788765432112345678"
+k = triple_des(key, ECB, "\0\0\0\0\0\0\0\0", pad=None, padmode=PAD_PKCS5)
+d = k.encrypt(data)
+b2bencryptkey = base64.standard_b64encode(d)
+print("Encrypted: %r" % b2bencryptkey)
+s = base64.standard_b64decode(b2bencryptkey)
+print("Decrypted: %r" % k.decrypt(s))
